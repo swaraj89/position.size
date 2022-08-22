@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { ContextProvider } from "./Context";
 import PositionSizer from "./PositionSizer";
-
 const App = () => {
   return <PositionSizer></PositionSizer>;
 };
