@@ -2,15 +2,20 @@ name: Deploy App
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   workflow_dispatch:
 jobs:
-  check_out_code:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install dependencies
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+      - name: Install Packages
         run: npm install
-          echo Install complete
-      - run: npm run build
-          echo building....
+      - name: Deploy to GH Pages
+        run: git config --global user.email "panigrahiswaraj89@gmail.com"
+          git config --global user.name "swaraj89"
+          git remote set-url origin https://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@github.com/swaraj89/position.size.git
+          npm run deploy
