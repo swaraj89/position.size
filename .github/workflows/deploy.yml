@@ -16,11 +16,11 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
       - name: Install Packages
-        run: npm install
+        run: npm ci
       - name: Build app
         run: npm run build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.GITHUB_TOKEN }}
+          personal_token: ${{ secrets.PERSONAL_TOKEN }}
           publish_dir: dist
