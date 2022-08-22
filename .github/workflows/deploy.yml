@@ -2,7 +2,7 @@ name: Deploy App
 
 on:
   pull_request:
-    branches: [master]
+    branches: [main]
 
 jobs:
   check_out_code:
