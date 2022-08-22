@@ -16,3 +16,7 @@ export function getExtraQty(currentCost, maxCost, riskPerShare) {
 
   return Math.floor(costDiff / extraQty);
 }
+
+export function getValueOfCapital(capital, percent) {
+  return (percent / 100) * capital;
+}

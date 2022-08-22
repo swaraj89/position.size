@@ -1,10 +1,32 @@
 * {
   box-sizing: border-box;
-  color: #333;
 }
 
 body {
-  background-color: #ede9e9;
+  background: #dbe6f6; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #f7e0dd,
+    #dbe6f6
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #f7e0dd,
+    #dbe6f6
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
   margin: 0 auto;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form-holder {
+  background: #fff;
+  border: 1px solid #fff;
+  border-radius: 10px;
+
+  padding: 20px 10px;
+
+  box-shadow: 13px 2px 28px -10px rgba(0, 0, 0, 0.36);
+  -webkit-box-shadow: 13px 2px 28px -10px rgba(0, 0, 0, 0.36);
+  -moz-box-shadow: 13px 2px 28px -10px rgba(0, 0, 0, 0.36);
 }

@@ -2,13 +2,14 @@
   "name": "position-sizer",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.html",
   "scripts": {
     "prepare": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
-    "dev": "parcel src/index.html",
+    "start": "parcel src/index.html --open chrome",
+    "build": "parcel build src/index.html",
     "lint-staged": "lint-staged"
   },
   "keywords": [],
@@ -22,18 +23,22 @@
     "lint-staged": "^13.0.3",
     "parcel": "^2.7.0",
     "prettier": "^2.5.1",
-    "process": "^0.11.10"
+    "process": "^0.11.10",
+    "prop-types": "^15.8.1"
   },
   "browserslist": [
     "last 2 Chrome versions",
     "last 2 Safari versions"
   ],
   "dependencies": {
+    "@mui/system": "^5.10.1",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
+    "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.10.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "prop-types": "^15.8.1"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -43,5 +48,8 @@
     "*.{json,md}": [
       "prettier --write"
     ]
+  },
+  "targets": {
+    "main": false
   }
 }

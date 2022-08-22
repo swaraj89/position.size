@@ -1,18 +1,58 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { Grid, Typography } from "@mui/material";
 
-const DisplayCapital = ({ maxRisk, capital, percentagePerShare }) => {
+import { getValueOfCapital } from "./utilities/sizerUtil";
+import { Context } from "./Context";
+
+const DisplayCapital = () => {
+  const { capital, maxPosition, riskOfEquity } = React.useContext(Context);
+  const [capitalValue] = capital;
+  const [maxPositionValue] = maxPosition;
+  const [riskOfEquityValue] = riskOfEquity;
+
   return (
-    <p>
-      Risk - {maxRisk} | Capital - {capital} | Max Per Share -{" "}
-      {percentagePerShare / 100}
-    </p>
+    <Grid container>
+      <Grid item xs={4}>
+        <Typography
+          align="center"
+          component={"p"}
+          gutterBottom
+          variant="overline"
+        >
+          Capital
+        </Typography>
+        <Typography align="center" component={"div"} variant="h4">
+          &#8377; {capitalValue}
+        </Typography>
+      </Grid>
+      <Grid item xs={4}>
+        <Typography
+          align="center"
+          component={"p"}
+          gutterBottom
+          variant="overline"
+        >
+          Per Trade Allocation
+        </Typography>
+        <Typography align="center" component={"div"} variant="h4">
+          &#8377; {getValueOfCapital(capitalValue, maxPositionValue).toFixed()}
+        </Typography>
+      </Grid>
+      <Grid item xs={4}>
+        <Typography
+          align="center"
+          component={"p"}
+          gutterBottom
+          variant="overline"
+        >
+          Risk Per Trade
+        </Typography>
+        <Typography align="center" component={"div"} variant="h4">
+          &#8377; {getValueOfCapital(capitalValue, riskOfEquityValue).toFixed()}
+        </Typography>
+      </Grid>
+    </Grid>
   );
 };
 
-DisplayCapital.propTypes = {
-  maxRisk: PropTypes.number.isRequired,
-  capital: PropTypes.number.isRequired,
-  percentagePerShare: PropTypes.number.isRequired,
-};
 export default DisplayCapital;

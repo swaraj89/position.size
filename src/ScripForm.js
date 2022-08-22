@@ -1,30 +1,71 @@
 import React from "react";
-import { Card, CardActionArea, CardContent, Typography } from "@mui/material";
-import { Box } from "@mui/system";
-import {} from "./utilities/sizerUtil";
+import PropTypes from "prop-types";
+import { Grid, TextField, Typography } from "@mui/material";
+import { Context } from "./Context";
 
-const ScripForm = () => {
-  const qty = 0;
+function getHelperText(cmp, sl) {
+  return (((cmp - sl) / cmp) * 100).toFixed(2) + `% of CMP`;
+}
+
+const ScripForm = ({ onInput }) => {
+  const { cmp, sl } = React.useContext(Context);
+
+  const [cmpValue] = cmp;
+  const [slValue] = sl;
+
+  const handleInputChange = ({ target }) => {
+    const data = { [target.name]: +target.value };
+
+    onInput(data);
+  };
 
   return (
-    <Box>
-      <Card
-        variant="outlined"
-        sx={{ alignContent: `center`, padding: `5px`, maxWidth: `200px` }}
-      >
-        <CardContent>
-          <Typography variant="h3" component="h3">
-            {qty}
+    <Grid container spacing={2} sx={{ padding: `10px` }}>
+      <Grid item xs={12} md={6}>
+        <TextField
+          required
+          id="outlined-required"
+          name="cmp"
+          label="Current Market Price(Per share)"
+          type="number"
+          variant="outlined"
+          helperText="Current Market Price"
+          fullWidth
+          value={cmpValue}
+          onChange={handleInputChange}
+          onBlur={handleInputChange}
+        />
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <TextField
+          required
+          id="outlined-required"
+          name="sl"
+          label="Stop Loss"
+          type="number"
+          variant="outlined"
+          value={slValue}
+          helperText={getHelperText(cmpValue, slValue)}
+          onChange={handleInputChange}
+          onBlur={handleInputChange}
+          error={cmpValue <= slValue}
+        />
+      </Grid>
+      {cmpValue <= slValue ? (
+        <Grid item xs>
+          <Typography variant="caption" color="error">
+            CMP cannot be less than SL
           </Typography>
-        </CardContent>
-        <CardActionArea>
-          <Typography variant="h6" component="span">
-            Quantity
-          </Typography>
-        </CardActionArea>
-      </Card>
-    </Box>
+        </Grid>
+      ) : null}
+    </Grid>
   );
+};
+
+ScripForm.propTypes = {
+  onInput: PropTypes.func.isRequired,
+  cmp: PropTypes.number.isRequired,
+  sl: PropTypes.number.isRequired,
 };
 
 export default ScripForm;
