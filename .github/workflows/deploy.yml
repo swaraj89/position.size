@@ -8,8 +8,8 @@ jobs:
   check_out_code:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: install dependencies
+      - uses: actions/checkout@v3
+      - name: Install dependencies
         run: npm install
           echo Install complete
       - run: npm run build
