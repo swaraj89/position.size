@@ -11,9 +11,7 @@
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
     "start": "parcel src/index.html --open chrome",
     "build": "parcel build src/index.html",
-    "lint-staged": "lint-staged",
-    "predeploy": "rm -rf dist && npm run build",
-    "deploy": "gh-pages -d dist"
+    "lint-staged": "lint-staged"
   },
   "keywords": [],
   "author": "",

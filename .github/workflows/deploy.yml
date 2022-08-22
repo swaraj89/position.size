@@ -1,26 +1,26 @@
-name: Deploy App
+name: "Deploy App"
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
-permissions:
-  contents: read
-  pull-requests: write
+
 jobs:
-  build:
+  deploy:
+    name: "Deploy"
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-      - name: Install Packages
-        run: npm ci
-      - name: Build app
-        run: npm run build
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Build the website
+        run: |
+          mkdir -p /home/runner/work/_temp/_github_home/build
+          npm run build 
+          cp dist /home/runner/work/_temp/_github_home/build
+      - name: Deploy Netlify
+        uses: danakim/gh-action-deploy-netlify@master
         with:
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
-          publish_dir: dist
+          AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          DEPLOY_PROD: true

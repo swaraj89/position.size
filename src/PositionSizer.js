@@ -65,7 +65,7 @@ const PositionSizer = () => {
               variant="h5"
               component="h5"
               gutterBottom
-              color={deepPurple[400]}
+              color={deepPurple[100]}
             >
               POSITION.SIZE
             </Typography>
