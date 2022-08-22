@@ -14,8 +14,9 @@ jobs:
         uses: actions/setup-node@v3
       - name: Install Packages
         run: npm install
-      - name: Deploy to GH Pages
-        run: git config --global user.email "panigrahiswaraj89@gmail.com"
-          git config --global user.name "swaraj89"
-          git remote set-url origin https://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@github.com/swaraj89/position.size.git
-          npm run deploy
+      - name: Build app
+        run: npm run build
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          publish_dir: dist
