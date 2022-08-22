@@ -12,7 +12,7 @@
     "start": "parcel src/index.html --open chrome",
     "build": "parcel build src/index.html",
     "lint-staged": "lint-staged",
-    "predeploy": "npm run build",
+    "predeploy": "rm -rf dist && npm run build",
     "deploy": "gh-pages -d dist"
   },
   "keywords": [],
