@@ -3,10 +3,14 @@ name: Deploy App
 on:
   push:
     branches: [main]
-
+  workflow_dispatch:
 jobs:
   check_out_code:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: install dependencies
+        run: npm install
+          echo Install complete
       - run: npm run build
+          echo building....
