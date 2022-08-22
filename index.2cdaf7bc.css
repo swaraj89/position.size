@@ -1,0 +1,21 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #dbe6f6;
+  background: -webkit-linear-gradient( to left, #f7e0dd, #dbe6f6 );
+  background: linear-gradient(to left, #f7e0dd, #dbe6f6);
+  margin: 0 auto;
+  font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form-holder {
+  background: #fff;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  padding: 20px 10px;
+  box-shadow: 13px 2px 28px -10px #0000005c;
+}
+
+/*# sourceMappingURL=index.2cdaf7bc.css.map */
