@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/index.html",
-  "homepage": "https://swaraj89.github.io",
+  "homepage": "https://swaraj89.github.io/position.size",
   "scripts": {
     "prepare": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1",
