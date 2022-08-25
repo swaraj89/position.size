@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Typography } from "@mui/material";
 
-import { getValueOfCapital } from "./utilities/sizerUtil";
+import { getValueOfCapital } from "./util/sizerUtil";
 import { Context } from "./Context";
 
 const DisplayCapital = () => {

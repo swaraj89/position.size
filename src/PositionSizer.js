@@ -7,7 +7,7 @@ import ScripForm from "./ScripForm";
 import { Container } from "@mui/system";
 
 import { Context } from "./Context";
-import { getExtraQty, getValueOfCapital } from "./utilities/sizerUtil";
+import { getExtraQty, getValueOfCapital } from "./util/sizerUtil";
 
 const PositionSizer = () => {
   const [qty, setQty] = useState(100);
