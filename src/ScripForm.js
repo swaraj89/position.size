@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Grid, TextField, Typography } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+
 import { Context } from "./Context";
 
 function getHelperText(cmp, sl) {
@@ -9,6 +12,8 @@ function getHelperText(cmp, sl) {
 
 const ScripForm = ({ onInput }) => {
   const { cmp, sl } = React.useContext(Context);
+  const theme = useTheme();
+  const isBelowSM = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [cmpValue] = cmp;
   const [slValue] = sl;
@@ -49,6 +54,7 @@ const ScripForm = ({ onInput }) => {
           onChange={handleInputChange}
           onBlur={handleInputChange}
           error={cmpValue <= slValue}
+          fullWidth={isBelowSM}
         />
       </Grid>
       {cmpValue <= slValue ? (

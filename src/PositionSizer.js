@@ -5,7 +5,6 @@ import DisplayCapital from "./DisplayCapital";
 import SizeDisplay from "./SizeDisplay";
 import ScripForm from "./ScripForm";
 import { Container } from "@mui/system";
-import { deepPurple } from "@mui/material/colors";
 
 import { Context } from "./Context";
 import { getExtraQty, getValueOfCapital } from "./utilities/sizerUtil";
@@ -43,34 +42,29 @@ const PositionSizer = () => {
   useEffect(() => {
     // logic to calculae position size
     const maxLossPerShare = cmp - sl;
-    const qty =
-      getValueOfCapital(riskOfEquityValue, capitalValue) / maxLossPerShare;
-    const maxCost = qty * cmp;
-    const maxPositionCost = (maxPositionValue / 100) * capitalValue;
+    const maxLossInTrade = getValueOfCapital(riskOfEquityValue, capitalValue);
+    let qty = Math.floor(maxLossInTrade / maxLossPerShare);
+    let cost = qty * cmp;
+    const canAfford = getValueOfCapital(capitalValue, maxPositionValue);
 
-    if (maxPositionCost < maxCost) {
-      const extra = getExtraQty(cmp, maxCost, maxLossPerShare);
-      setQty(Math.floor(qty - extra));
-    } else {
-      setQty(Math.floor(qty));
+    while (cost > canAfford) {
+      const extra = getExtraQty(cost, canAfford, maxLossPerShare);
+      qty = qty - extra;
+      cost = qty * cmp;
     }
+    setQty(qty);
   }, [capitalValue, cmp, sl, maxPositionValue, riskOfEquityValue]);
 
   return (
     <>
-      <Container maxWidth="lg">
-        <Grid container spacing={0.5} sx={{ padding: "10px" }} mt={10}>
-          <Grid item xs={12}>
-            <Typography
-              variant="h5"
-              component="h5"
-              gutterBottom
-              color={deepPurple[400]}
-            >
-              POSITION.SIZE
-            </Typography>
-          </Grid>
-          <Grid item xs p={3}>
+      <Container maxWidth="lg" className="position-size-holder">
+        <Grid
+          container
+          spacing={0.5}
+          sx={{ padding: "10px" }}
+          className="main-grid"
+        >
+          <Grid item p={{ xs: 0, sm: 3 }} xs={12} md={6}>
             <Box className="form-holder" mb={2}>
               <Typography variant="overline" component="p" gutterBottom>
                 Set Your Portfolio details
@@ -84,7 +78,7 @@ const PositionSizer = () => {
               <ScripForm onInput={handleScripInput}></ScripForm>
             </Box>
           </Grid>
-          <Grid item xs p={3}>
+          <Grid item p={{ xs: 0, sm: 3 }} xs={12} md={6}>
             <Box className="form-holder" mb={2}>
               <DisplayCapital></DisplayCapital>
             </Box>

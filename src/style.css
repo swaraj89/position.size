@@ -17,8 +17,12 @@ body {
 
   margin: 0 auto;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
 }
 
+.position-size-holder {
+  min-height: 86vh;
+}
 .form-holder {
   background: #fff;
   border: 1px solid #fff;
@@ -29,4 +33,29 @@ body {
   box-shadow: 13px 2px 28px -10px rgba(0, 0, 0, 0.36);
   -webkit-box-shadow: 13px 2px 28px -10px rgba(0, 0, 0, 0.36);
   -moz-box-shadow: 13px 2px 28px -10px rgba(0, 0, 0, 0.36);
+}
+
+div.app-name-holder {
+  margin-top: 20px;
+  padding: 24px 24px 0px 24px;
+}
+
+footer {
+  background-color: #303030;
+  color: #dbe6f6;
+}
+
+footer a {
+  color: #fff;
+}
+
+@media screen and (min-width: 0px) and (max-width: 600px) {
+  .main-grid {
+    margin: 10px 0;
+  }
+  div.app-name-holder {
+    font-weight: 700;
+    margin-top: 10px;
+    padding: 12px 12px 0px 26px;
+  }
 }

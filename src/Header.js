@@ -1,23 +1,18 @@
 import React from "react";
-import { AppBar, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Typography } from "@mui/material";
+import { deepPurple } from "@mui/material/colors";
 
 const Header = () => {
   return (
-    <Box>
-      <AppBar position="static">
-        <Typography
-          variant="h3"
-          component="h1"
-          p={2}
-          sx={{
-            color: `#d3d3d3`,
-          }}
-        >
-          Position Sizer
-        </Typography>
-      </AppBar>
-    </Box>
+    <Typography
+      variant="h5"
+      component="div"
+      gutterBottom
+      color={deepPurple[400]}
+      className={"app-name-holder"}
+    >
+      POSITION.SIZE
+    </Typography>
   );
 };
 

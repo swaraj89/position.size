@@ -10,8 +10,8 @@ export function computeCost(qty, cmp) {
   return qty * cmp;
 }
 
-export function getExtraQty(currentCost, maxCost, riskPerShare) {
-  const costDiff = currentCost - maxCost;
+export function getExtraQty(currentCost, canAfford, riskPerShare) {
+  const costDiff = currentCost - canAfford;
   const extraQty = costDiff / riskPerShare;
 
   return Math.floor(costDiff / extraQty);

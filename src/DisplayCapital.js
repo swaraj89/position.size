@@ -12,7 +12,7 @@ const DisplayCapital = () => {
 
   return (
     <Grid container>
-      <Grid item xs={4}>
+      <Grid item xs={12} md={4} mb={{ xs: 2 }}>
         <Typography
           align="center"
           component={"p"}
@@ -25,7 +25,7 @@ const DisplayCapital = () => {
           &#8377; {capitalValue}
         </Typography>
       </Grid>
-      <Grid item xs={4}>
+      <Grid item xs={12} md={4} mb={{ xs: 2 }}>
         <Typography
           align="center"
           component={"p"}
@@ -38,7 +38,7 @@ const DisplayCapital = () => {
           &#8377; {getValueOfCapital(capitalValue, maxPositionValue).toFixed()}
         </Typography>
       </Grid>
-      <Grid item xs={4}>
+      <Grid item xs={12} md={4} mb={{ xs: 2 }}>
         <Typography
           align="center"
           component={"p"}
