@@ -77,6 +77,7 @@ test("keyboard-only trade entry replaces values, advances fields and reviews the
   page,
 }) => {
   await page.goto("./");
+  await expect(page.getByLabel("Entry price", { exact: true })).toBeVisible();
   await page.keyboard.press("Alt+4");
   await expect(page.getByLabel("Entry price", { exact: true })).toBeFocused();
   await page.keyboard.type("200");
@@ -112,6 +113,9 @@ test("all field shortcuts, help and escape work without overriding ordinary typi
   page,
 }) => {
   await page.goto("./");
+  await expect(
+    page.getByLabel("Portfolio value", { exact: true }),
+  ).toBeVisible();
   const labels = [
     "Portfolio value",
     "Max. allocation",

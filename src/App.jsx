@@ -48,12 +48,12 @@ function Field({
 }) {
   return (
     <div className="field">
-      <label htmlFor={name}>
-        {label}
+      <div className="field-label-row">
+        <label htmlFor={name}>{label}</label>
         <kbd className="field-shortcut" aria-hidden="true">
           Alt {fieldNames.indexOf(name) + 1}
         </kbd>
-      </label>
+      </div>
       <div className={`input-wrap ${error ? "invalid" : ""}`}>
         {suffix === "₹" && <span aria-hidden="true">₹</span>}
         <input

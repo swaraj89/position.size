@@ -834,7 +834,7 @@ kbd {
   color: #b7c5a7;
   white-space: nowrap;
 }
-.field label {
+.field-label-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -923,4 +923,11 @@ kbd {
   .shortcut-content dl {
     grid-template-columns: 1fr;
   }
+}
+
+.field-label-row {
+  margin-bottom: 9px;
+}
+.field-label-row label {
+  margin-bottom: 0;
 }
