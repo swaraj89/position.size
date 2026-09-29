@@ -72,6 +72,7 @@ test("whole-share quantity is maximal and respects both limits across varied inp
         const { result: r } = calculate({
           capital,
           entry,
+          target: (Number(entry) + 1).toFixed(2),
           stop: "0.01",
           risk,
           allocation: "37.25",
@@ -86,4 +87,42 @@ test("whole-share quantity is maximal and respects both limits across varied inp
       }
     }
   }
+});
+
+test("target profit and exact reward/risk threshold determine trade fit without changing size", () => {
+  const baseline = calculate().result;
+  assert.equal(baseline.profit, 100);
+  assert.equal(baseline.rewardRisk, 2);
+  assert.equal(baseline.tradeFits, true);
+  const below = calculate({ target: "1019.99" }).result;
+  assert.equal(below.quantity, baseline.quantity);
+  assert.equal(below.rewardRiskPass, false);
+  assert.equal(below.tradeFits, false);
+  assert.equal(calculate({ minRewardRisk: "2.01" }).result.tradeFits, false);
+  assert.equal(calculate({ target: "1030" }).result.profit, 150);
+  for (const changes of [
+    { risk: "0" },
+    { allocation: "0" },
+    { capital: "1" },
+  ]) {
+    const r = calculate(changes).result;
+    assert.equal(r.profit, 0);
+    assert.equal(r.rewardRiskPass, true);
+    assert.equal(r.tradeFits, false);
+  }
+  for (const changes of [
+    { target: "1000" },
+    { target: "999" },
+    { minRewardRisk: "0" },
+  ]) {
+    assert.equal(calculate(changes).result, null);
+  }
+  assert.ok(
+    calculate({
+      capital: "10000000000",
+      entry: "0.02",
+      stop: "0.01",
+      target: "10000000000",
+    }).errors.target,
+  );
 });

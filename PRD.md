@@ -44,3 +44,19 @@ Capital and entry must be positive; stop can be zero but must be below entry. Pe
 ## Delivery boundary
 
 Source and CI/CD configuration are deliverables. Publishing requires a dedicated VPS directory and the repository's deployment secrets/enablement. No production infrastructure or DNS changes are implied by this modernization.
+
+## Personal pre-trade decision support
+
+Add target price and a user-defined minimum reward/risk, with illustrative defaults ₹1,020 and 2×. Target must exceed entry; the minimum must be positive, with up to two decimals. Show hypothetical profit (quantity × target-entry), reward/risk ((target-entry)/(entry-stop)), and a trade-fit summary. Target and minimum do not alter the sized quantity.
+
+“Meets your rules” requires at least one whole share and an unrounded ratio at or above the minimum. The summary explicitly checks affordability, reward/risk, risk budget and allocation cap. Zero quantity must fail even with a passing ratio. Invalid inputs show a pending summary and no stale results. Label the result as a numbers check, not a buy signal. Profit excludes fees, taxes and slippage. Reject projected profit beyond safe integer paise. Reset restores all seven defaults. No storage, backend or accounts.
+
+Acceptance: defaults produce ₹100 potential profit, 2× and a passing summary; a ₹1,019.99 target fails a 2× threshold despite display rounding; changing minimum updates fit; invalid target clears results; zero risk fails fit. Cover these in calculation and UI tests.
+
+## /size analytics
+
+Reuse the portfolio Umami Cloud website ID to analyze the calculator within the same domain. Normalize /size and /size/ pageviews to /size, exclude development traffic, omit entered financial values, and track lightweight custom events for page-load timing, first interaction, fields used, plan outcome, reset/preset clicks, outbound links, formula views and error occurrence. Events are capped per document to minimize shared quota consumption. Existing Umami pageviews provide visit, referrer and device metrics. No paid services, replay, backend or accounts are introduced. Analytics failure must not interfere with calculation. Production assets must load beneath /size/.
+
+## Keyboard-first entry
+
+Provide Alt/Option + 1–7 in input order (capital, allocation, risk, entry, stop, target, minimum reward/risk). Focus jumps select the existing value for immediate replacement. Enter advances; Shift+Enter moves back; Enter on the final field focuses the trade-fit summary. Tab keeps native behavior. Escape leaves an input or closes the guide. Alt/Option+Shift+R restores defaults and focuses entry; no single-key reset. Ignore composition, key repeats, Ctrl/Meta and AltGraph combinations. A compact expandable guide, subtle field hints and an Edit trade button make shortcuts discoverable. No autofocus or automatic trade action. Desktop and mobile remain usable with pointer/touch; mobile hides field shortcut hints. Keyboard-only tests cover entry, navigation, reset, help and computed results.

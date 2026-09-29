@@ -152,7 +152,25 @@ jobs:
       - name: Check SSH connection and prepare destination
         run: |
           set -euo pipefail
-          ssh position-size-vps "mkdir -p -- '$VPS_TARGET_DIR' && test -w '$VPS_TARGET_DIR' && command -v rsync >/dev/null"
+          ssh position-size-vps "sh -s -- '$VPS_TARGET_DIR'" <<'REMOTE'
+          set -eu
+          target_dir=$1
+          echo "SSH authentication succeeded."
+          if ! mkdir -p -- "$target_dir"; then
+            echo "ERROR: Cannot create VPS_TARGET_DIR. Check the path and parent-directory permissions for VPS_USER." >&2
+            exit 1
+          fi
+          if ! test -w "$target_dir" || ! test -x "$target_dir"; then
+            echo "ERROR: VPS_USER needs write and traversal permissions on VPS_TARGET_DIR. Ask the server administrator to grant access to this dedicated web root." >&2
+            exit 1
+          fi
+          echo "Destination directory permissions passed."
+          if ! command -v rsync >/dev/null 2>&1; then
+            echo "ERROR: rsync is missing from the VPS non-interactive SSH PATH. Install rsync on the VPS or make it available to VPS_USER." >&2
+            exit 1
+          fi
+          echo "Remote rsync is available. Deployment prerequisites passed."
+          REMOTE
 
       - name: Upload production files to VPS
         run: |

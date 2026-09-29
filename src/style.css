@@ -773,3 +773,154 @@ footer .micro {
     scroll-behavior: auto !important;
   }
 }
+
+.upside-metrics {
+  border-top: 0;
+}
+.trade-fit {
+  margin-top: 22px;
+  padding: 18px;
+  background: #1c2318;
+  border: 1px solid #566643;
+  border-radius: 8px;
+}
+.trade-fit h2 {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 9px 0 15px;
+  color: var(--accent);
+}
+.trade-fit[data-fit="fail"] {
+  border-color: #85654b;
+}
+.trade-fit[data-fit="fail"] h2 {
+  color: #e9c09a;
+}
+.trade-fit[data-fit="pending"] h2 {
+  color: #c3ceb8;
+}
+.trade-fit ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+.trade-fit li {
+  display: flex;
+  gap: 9px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #d1dbc7;
+}
+.trade-fit li span {
+  flex-shrink: 0;
+}
+.trade-fit p:not(.eyebrow) {
+  font-size: 11px;
+  line-height: 1.6;
+  color: #b7c5a7;
+}
+.trade-fit .fit-caveat {
+  margin: 16px 0 0;
+}
+
+/* Keyboard affordances stay quiet until they are useful. */
+kbd {
+  font: 10px var(--mono);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 3px 5px;
+  color: #b7c5a7;
+  white-space: nowrap;
+}
+.field label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+}
+.field-shortcut {
+  border: 0;
+  padding: 0;
+  font-size: 9px;
+  color: #a1ab98;
+}
+.field:focus-within .field-shortcut {
+  color: var(--accent);
+}
+.shortcut-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin-bottom: 18px;
+}
+.edit-trade {
+  border: 1px solid #566643;
+  border-radius: 5px;
+  background: #252c20;
+  color: #cbfa61;
+  font-size: 12px;
+  padding: 10px 14px;
+}
+.edit-trade span {
+  margin-left: 12px;
+}
+.keyboard-note {
+  font-size: 10px;
+  color: var(--muted);
+}
+.shortcut-help {
+  margin-left: auto;
+  font-size: 11px;
+  color: #c3ceb8;
+}
+.shortcut-help summary {
+  cursor: pointer;
+  padding: 8px 0;
+}
+.shortcut-help summary kbd {
+  margin-left: 8px;
+}
+.shortcut-help[open] {
+  flex-basis: 100%;
+  background: #1c201b;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 18px;
+}
+.shortcut-content {
+  max-width: 640px;
+}
+.shortcut-content p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+.shortcut-content dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 28px;
+}
+.shortcut-content dl > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.shortcut-content dd {
+  margin: 0;
+}
+.trade-fit:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+@media (max-width: 700px) {
+  .keyboard-note,
+  .field-shortcut {
+    display: none;
+  }
+  .shortcut-content dl {
+    grid-template-columns: 1fr;
+  }
+}

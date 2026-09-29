@@ -4,6 +4,8 @@ export const defaults = {
   risk: "2.5",
   entry: "1000",
   stop: "990",
+  target: "1020",
+  minRewardRisk: "2",
 };
 
 // Parse decimal input into hundredths without floating-point multiplication.
@@ -40,6 +42,16 @@ export function calculatePosition(input) {
   ) {
     errors.stop = "Stop loss must be below the entry price for a long trade.";
   }
+  if (
+    values.target !== null &&
+    values.entry !== null &&
+    values.target <= values.entry
+  ) {
+    errors.target = "Target must be above the entry price for a long trade.";
+  }
+  if (values.minRewardRisk === 0) {
+    errors.minRewardRisk = "Enter a minimum ratio greater than zero.";
+  }
   if (Object.keys(errors).length) return { errors, result: null };
 
   const { capital, allocation, risk, entry, stop } = values;
@@ -50,10 +62,28 @@ export function calculatePosition(input) {
   const riskQuantity = Math.floor(budget / distance);
   const allocationQuantity = Math.floor(cap / entry);
   const quantity = Math.min(riskQuantity, allocationQuantity);
+  const reward = values.target - entry;
+  const profitPaise = BigInt(quantity) * BigInt(reward);
+  if (profitPaise > BigInt(Number.MAX_SAFE_INTEGER)) {
+    return {
+      errors: {
+        target:
+          "Projected profit is too large to represent precisely. Reduce the target or position.",
+      },
+      result: null,
+    };
+  }
+  // Compare exact hundredths, not the rounded ratio displayed by the UI.
+  const rewardRiskPass =
+    BigInt(reward) * 100n >= BigInt(distance) * BigInt(values.minRewardRisk);
   return {
     errors,
     result: {
       quantity,
+      profit: Number(profitPaise) / 100,
+      rewardRisk: reward / distance,
+      rewardRiskPass,
+      tradeFits: quantity > 0 && rewardRiskPass,
       cost: (quantity * entry) / 100,
       loss: (quantity * distance) / 100,
       remaining: (capital - quantity * entry) / 100,
